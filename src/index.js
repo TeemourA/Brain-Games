@@ -8,7 +8,7 @@ export const greetingBrainEven = () => {
 const printName = (name) => {
   console.log(`Hello, ${name}!`);
 };
-// eslint-disable-next-line import/prefer-default-export
+
 export const askName = () => {
   const name = readlineSync.question('May I have your name?');
   printName(name);
