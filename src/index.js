@@ -17,6 +17,7 @@ export const askName = () => {
 
 export const getRigthAnswer = (brainGame) => brainGame((rightAnswer) => rightAnswer);
 
+// eslint-disable-next-line max-len
 export const getCurrentAnswer = (brainGame) => brainGame((rightAnswer, currentAnswer) => currentAnswer);
 
 export const playQuiz = (quiz, name, counter = 0) => {
@@ -40,4 +41,3 @@ export const brainEven = () => {
   const currentAnswer = readlineSync.question('Your answer:');
   return (f) => f(rightAnswer, currentAnswer);
 };
-
