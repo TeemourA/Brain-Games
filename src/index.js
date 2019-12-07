@@ -39,6 +39,23 @@ export const brainCalc = (name = 'Anonymous') => {
   return (f) => f(rightAnswer, currentAnswer, retry);
 };
 
+export const brainGCD = (name = '') => {
+  const gcd = (x, y) => {
+    if (y) {
+      return gcd(y, x % y);
+    }
+    return x;
+  };
+  const firstNumber = Math.floor(Math.random() * 100);
+  const secondNumber = Math.floor(Math.random() * 100);
+  const rightAnswer = `${gcd(firstNumber, secondNumber)}`;
+  console.log(`Question: ${firstNumber} ${secondNumber}`);
+  const currentAnswer = readlineSync.question('Your answer:');
+  const retry = () => console.log(`Let's try again, ${name}!\n'${currentAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
+
+  return (f) => f(rightAnswer, currentAnswer, retry);
+};
+
 export const askName = (quiz = '') => {
   const greeting = () => {
     console.log('Welcome to the Brain Games!');
@@ -58,6 +75,10 @@ export const askName = (quiz = '') => {
     case brainCalc:
       greeting();
       console.log('What is the result of the expression?\n');
+      break;
+    case brainGCD:
+      greeting();
+      console.log('Find the greatest common divisor of given numbers.\n');
       break;
     default:
       greeting();
