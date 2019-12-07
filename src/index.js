@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 
-const print = (text, name) => {
+const print = (text, name = '') => {
   console.log(`${text}, ${name}!`);
 };
 
@@ -43,6 +43,13 @@ export const askName = (quiz = '') => {
   const greeting = () => {
     console.log('Welcome to the Brain Games!');
   };
+
+  const getName = () => {
+    const name = readlineSync.question('May I have your name?');
+    const anon = 'Anonymous';
+    return name.length ? name : anon;
+  };
+
   switch (quiz) {
     case brainEven:
       greeting();
@@ -55,7 +62,7 @@ export const askName = (quiz = '') => {
     default:
       greeting();
   }
-  const name = readlineSync.question('May I have your name?');
+  const name = getName();
   print('Hello', name);
   return name;
 };
