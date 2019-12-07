@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import {
-  askName, playQuiz, greetingBrainEven, brainEven,
+  askName, playQuiz, brainEven,
 } from '..';
 
-greetingBrainEven();
-
-playQuiz(brainEven, askName());
+playQuiz(brainEven, askName(brainEven));
