@@ -9,3 +9,6 @@
 
 ## Brain GCD ##
 <a href="https://asciinema.org/a/W9crjYEmGoSGqhzKdP3dmgjxD"> <img src="https://asciinema.org/a/W9crjYEmGoSGqhzKdP3dmgjxD.svg" /></a>
+
+## Brain Progression ##
+<a href="https://asciinema.org/a/hmJlnnjSRDbBbWeWUIyvSr4wJ"> <img src="https://asciinema.org/a/hmJlnnjSRDbBbWeWUIyvSr4wJ.svg" /></a>
