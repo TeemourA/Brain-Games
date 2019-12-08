@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+import brainGCD from '../games/brain-gcd';
 import {
-  askName, playQuiz, brainGCD,
+  askName, playQuiz,
 } from '..';
 
-playQuiz(brainGCD, askName(brainGCD));
+playQuiz(brainGCD, askName('brainGCD'));
