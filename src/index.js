@@ -4,8 +4,16 @@ const print = (text, name = '') => {
   console.log(`${text}, ${name}!`);
 };
 
+const generateNumber = (n = 1, m = 0) => m + Math.floor(Math.random() * n);
+
+export const getFirstParameter = (f) => f((x) => x);
+
+export const getSecondParameter = (f) => f((x, y) => y);
+
+export const getThirdParameter = (f) => f((x, y, z) => z);
+
 export const brainEven = (name = 'Anonymous') => {
-  const currentNumber = Math.floor(Math.random() * 100);
+  const currentNumber = generateNumber(100);
   console.log(`Question: ${currentNumber}`);
   const rightAnswer = currentNumber % 2 ? 'no' : 'yes';
   const currentAnswer = readlineSync.question('Your answer:');
@@ -28,9 +36,9 @@ export const brainCalc = (name = 'Anonymous') => {
   };
 
   const operations = '+-*';
-  const firstNumber = Math.floor(Math.random() * 100);
-  const secondNumber = Math.floor(Math.random() * 100);
-  const random = Math.floor(Math.random() * 3);
+  const firstNumber = generateNumber(100);
+  const secondNumber = generateNumber(100);
+  const random = generateNumber(3);
   const rightAnswer = calculateAnswer(random, firstNumber, secondNumber);
   console.log(`Question: ${firstNumber} ${operations[random]} ${secondNumber}`);
   const currentAnswer = readlineSync.question('Your answer:');
@@ -46,10 +54,33 @@ export const brainGCD = (name = '') => {
     }
     return x;
   };
-  const firstNumber = Math.floor(Math.random() * 100);
-  const secondNumber = Math.floor(Math.random() * 100);
+  const firstNumber = generateNumber(100);
+  const secondNumber = generateNumber(100);
   const rightAnswer = `${gcd(firstNumber, secondNumber)}`;
   console.log(`Question: ${firstNumber} ${secondNumber}`);
+  const currentAnswer = readlineSync.question('Your answer:');
+  const retry = () => console.log(`Let's try again, ${name}!\n'${currentAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
+
+  return (f) => f(rightAnswer, currentAnswer, retry);
+};
+
+// brain-progression
+export const brainProgression = (name = '') => {
+  const makeProgression = (base, increment, length = 10, result = '') => {
+    if (length) {
+      const current = base + (increment * length);
+      return makeProgression(base, increment, length - 1, `${current} ${result}`);
+    }
+    const secretValue = `${base + (increment * generateNumber(10, 1))}`;
+    const progressionWithSecret = `${result.replace(secretValue, '..')}`;
+
+    return (f) => f(secretValue, progressionWithSecret);
+  };
+
+  const currentProgression = makeProgression(generateNumber(5), generateNumber(3, 2));
+  const rightAnswer = getFirstParameter(currentProgression);
+  const progressionWithSecret = getSecondParameter(currentProgression);
+  console.log(`Question: ${progressionWithSecret}`);
   const currentAnswer = readlineSync.question('Your answer:');
   const retry = () => console.log(`Let's try again, ${name}!\n'${currentAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
 
@@ -80,6 +111,10 @@ export const askName = (quiz = '') => {
       greeting();
       console.log('Find the greatest common divisor of given numbers.\n');
       break;
+    case brainProgression:
+      greeting();
+      console.log('What number is missing in the progression?\n');
+      break;
     default:
       greeting();
   }
@@ -88,22 +123,17 @@ export const askName = (quiz = '') => {
   return name;
 };
 
-export const getRigthAnswer = (brainGame) => brainGame((rightAnswer) => rightAnswer);
-
-// eslint-disable-next-line max-len
-export const getCurrentAnswer = (brainGame) => brainGame((rightAnswer, currentAnswer) => currentAnswer);
-
-// eslint-disable-next-line max-len
-export const getRetry = (brainGame) => brainGame((rightAnswer, currentAnswer, retry) => retry());
-
 export const playQuiz = (quiz, name, counter = 0) => {
   if (counter === 3) {
     console.log(`Congratulations, ${name}!`);
   } else {
     const result = quiz(name);
+    const rightAnswer = getFirstParameter(result);
+    const currentAnswer = getSecondParameter(result);
+    const retry = getThirdParameter(result);
 
-    if (getRigthAnswer(result) !== getCurrentAnswer(result)) {
-      getRetry(result);
+    if (rightAnswer !== currentAnswer) {
+      retry();
     } else {
       playQuiz(quiz, name, counter + 1);
     }
