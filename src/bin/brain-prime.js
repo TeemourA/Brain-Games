@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import brainPrime from '../games/brain-prime';
-import {
-  askName, playQuiz,
-} from '..';
+import startGame from '../games/brain-prime';
 
-playQuiz(brainPrime, askName('brainPrime'));
+startGame();

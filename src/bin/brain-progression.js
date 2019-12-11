@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import brainProgression from '../games/brain-progression';
-import {
-  askName, playQuiz,
-} from '..';
+import startGame from '../games/brain-progression';
 
-playQuiz(brainProgression, askName('brainProgression'));
+startGame();
