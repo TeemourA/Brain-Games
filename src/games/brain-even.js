@@ -1,13 +1,12 @@
-import readlineSync from 'readline-sync';
-import { generateNumber } from '..';
+import { generateNumber, playQuiz } from '..';
 
-const brainEven = (name = 'Anonymous') => {
-  const currentNumber = generateNumber(100);
-  console.log(`Question: ${currentNumber}`);
-  const rightAnswer = currentNumber % 2 ? 'no' : 'yes';
-  const currentAnswer = readlineSync.question('Your answer:');
-  const retry = () => console.log(`Let's try again, ${name}!`);
-  return (f) => f(rightAnswer, currentAnswer, retry);
+const isEven = (n) => (!(n % 2));
+const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
+
+const brainEven = () => {
+  const currentQuestion = generateNumber(100);
+  const rightAnswer = isEven(currentQuestion) ? 'yes' : 'no';
+  return (f) => f(currentQuestion, rightAnswer);
 };
 
-export default brainEven;
+export default () => playQuiz(brainEven, rules);

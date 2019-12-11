@@ -1,24 +1,27 @@
-import readlineSync from 'readline-sync';
-import { generateNumber } from '..';
+import { generateNumber, playQuiz } from '..';
 
-const brainPrime = (name = 'Anonymous') => {
-  const isPrime = (num, divisor = 2) => {
-    if (num === divisor) {
+const isPrime = (num) => {
+  const iter = (number, divisor) => {
+    if (number === divisor) {
       return 'yes';
     }
-    if (num < 2 || num % divisor === 0) {
+    if (number < 2 || number % divisor === 0) {
       return 'no';
     }
 
-    return isPrime(num, divisor + 1);
+    return iter(number, divisor + 1);
   };
-  const number = generateNumber(150);
-  const rightAnswer = isPrime(number);
-  console.log(`Question: ${number}`);
-  const currentAnswer = readlineSync.question('Your answer:');
-  const retry = () => console.log(`Let's try again, ${name}!`);
-
-  return (f) => f(rightAnswer, currentAnswer, retry);
+  return iter(num, 2);
 };
 
-export default brainPrime;
+const rules = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+
+const brainPrime = () => {
+  const number = generateNumber(150);
+  const rightAnswer = isPrime(number);
+  const currentQuestion = `${number}`;
+
+  return (f) => f(currentQuestion, rightAnswer);
+};
+
+export default () => playQuiz(brainPrime, rules);

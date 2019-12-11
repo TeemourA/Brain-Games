@@ -1,7 +1,10 @@
-import readlineSync from 'readline-sync';
-import { generateNumber, getFirstParameter, getSecondParameter } from '..';
+import {
+  generateNumber, getFirstParameter, getSecondParameter, playQuiz,
+} from '..';
 
-const brainProgression = (name = 'Anonymous') => {
+const rules = 'What number is missing in the progression?';
+
+const brainProgression = () => {
   const makeProgression = (base, increment, length = 10, result = '') => {
     if (length) {
       const current = base + (increment * length);
@@ -16,11 +19,9 @@ const brainProgression = (name = 'Anonymous') => {
   const currentProgression = makeProgression(generateNumber(5), generateNumber(3, 2));
   const rightAnswer = getFirstParameter(currentProgression);
   const progressionWithSecret = getSecondParameter(currentProgression);
-  console.log(`Question: ${progressionWithSecret}`);
-  const currentAnswer = readlineSync.question('Your answer:');
-  const retry = () => console.log(`Let's try again, ${name}!\n'${currentAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
+  const currentQuestion = progressionWithSecret; // for further readability
 
-  return (f) => f(rightAnswer, currentAnswer, retry);
+  return (f) => f(currentQuestion, rightAnswer);
 };
 
-export default brainProgression;
+export default () => playQuiz(brainProgression, rules);

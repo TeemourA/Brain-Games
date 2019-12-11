@@ -1,21 +1,15 @@
-import readlineSync from 'readline-sync';
-import { generateNumber } from '..';
+import { generateNumber, playQuiz } from '..';
 
-const brainGCD = (name = 'Anonymous') => {
-  const gcd = (x, y) => {
-    if (y) {
-      return gcd(y, x % y);
-    }
-    return x;
-  };
+const gcd = (x, y) => (y ? gcd(y, x % y) : x);
+const rules = 'Find the greatest common divisor of given numbers.';
+
+const brainGCD = () => {
   const firstNumber = generateNumber(100);
   const secondNumber = generateNumber(100);
   const rightAnswer = `${gcd(firstNumber, secondNumber)}`;
-  console.log(`Question: ${firstNumber} ${secondNumber}`);
-  const currentAnswer = readlineSync.question('Your answer:');
-  const retry = () => console.log(`Let's try again, ${name}!\n'${currentAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
+  const currentQuestion = `${firstNumber} ${secondNumber}`;
 
-  return (f) => f(rightAnswer, currentAnswer, retry);
+  return (f) => f(currentQuestion, rightAnswer);
 };
 
-export default brainGCD;
+export default () => playQuiz(brainGCD, rules);
