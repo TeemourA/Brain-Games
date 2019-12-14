@@ -2,7 +2,11 @@
   "name": "frontend-project-lvl1",
   "version": "1.0.0",
   "description": "Brain games project",
-  "keywords": ["brain", "games", "brain-games"],
+  "keywords": [
+    "brain",
+    "games",
+    "brain-games"
+  ],
   "main": "index.js",
   "bin": {
     "brain-games": "dist/bin/brain-games.js",
@@ -42,6 +46,7 @@
     "eslint-plugin-import": "^2.18.2"
   },
   "dependencies": {
+    "@hexlet/pairs": "^1.0.10",
     "readline-sync": "^1.4.10"
   }
 }
