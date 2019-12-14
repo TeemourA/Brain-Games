@@ -2,7 +2,7 @@ import { cons } from '@hexlet/pairs';
 import { generateNumber, playQuiz } from '..';
 
 const rules = 'What is the result of the expression?';
-const list = '+-*';
+const operationList = '+-*';
 
 const calculateAnswer = (o, x, y) => {
   switch (o) {
@@ -20,7 +20,7 @@ const calculateAnswer = (o, x, y) => {
 const brainCalc = () => {
   const firstNumber = generateNumber(100);
   const secondNumber = generateNumber(100);
-  const operation = list[generateNumber(list.length)];
+  const operation = operationList[generateNumber(operationList.length)];
   const rightAnswer = `${calculateAnswer(operation, firstNumber, secondNumber)}`;
   const currentQuestion = `${firstNumber} ${operation} ${secondNumber}`;
 
