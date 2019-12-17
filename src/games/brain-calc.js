@@ -1,11 +1,12 @@
 import { cons } from '@hexlet/pairs';
-import { generateNumber, playQuiz } from '..';
+import generateNumber from '../utils';
+import playQuiz from '..';
 
-const rules = 'What is the result of the expression?';
-const operationList = '+-*';
+const rule = 'What is the result of the expression?';
+const operations = '+-*';
 
-const calculateAnswer = (o, x, y) => {
-  switch (o) {
+const calculateAnswer = (operation, x, y) => {
+  switch (operation) {
     case '+':
       return x + y;
     case '-':
@@ -13,18 +14,18 @@ const calculateAnswer = (o, x, y) => {
     case '*':
       return x * y;
     default:
-      return '';
+      return null;
   }
 };
 
-const brainCalc = () => {
-  const firstNumber = generateNumber(100);
-  const secondNumber = generateNumber(100);
-  const operation = operationList[generateNumber(operationList.length)];
-  const rightAnswer = `${calculateAnswer(operation, firstNumber, secondNumber)}`;
-  const currentQuestion = `${firstNumber} ${operation} ${secondNumber}`;
+const playBrainCalc = () => {
+  const firstOperand = generateNumber(0, 100);
+  const secondOperand = generateNumber(0, 100);
+  const operation = operations[generateNumber(0, operations.length - 1)];
+  const rightAnswer = `${calculateAnswer(operation, firstOperand, secondOperand)}`;
+  const currentQuestion = `${firstOperand} ${operation} ${secondOperand}`;
 
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(brainCalc, rules);
+export default () => playQuiz(playBrainCalc, rule);

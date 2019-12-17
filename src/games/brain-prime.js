@@ -1,7 +1,8 @@
 import { cons } from '@hexlet/pairs';
-import { generateNumber, playQuiz } from '..';
+import generateNumber from '../utils';
+import playQuiz from '..';
 
-const rules = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const rule = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const isPrime = (num) => {
   const iter = (number, divisor) => {
@@ -17,12 +18,12 @@ const isPrime = (num) => {
   return iter(num, 2);
 };
 
-const brainPrime = () => {
-  const number = generateNumber(150);
+const playBrainPrime = () => {
+  const number = generateNumber(0, 150);
   const rightAnswer = isPrime(number) ? 'yes' : 'no';
   const currentQuestion = `${number}`;
 
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(brainPrime, rules);
+export default () => playQuiz(playBrainPrime, rule);
