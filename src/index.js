@@ -1,8 +1,6 @@
 import readlineSync from 'readline-sync';
 import { car, cdr } from '@hexlet/pairs';
 
-const generateNumber = (n = 1, m = 0) => m + Math.floor(Math.random() * n);
-
 const getName = () => {
   const name = readlineSync.question('May I have your name? ');
   const anon = 'Anonymous';
@@ -14,11 +12,11 @@ const playQuiz = (quiz, rules) => {
   console.log(`${rules}\n`);
   const userName = getName();
   console.log(`Hello, ${userName}!`);
-  const iter = (quizFlow, name, counter = 0) => {
-    if (counter === 3) {
+  const iter = (startQuiz, name, roundCounter) => {
+    if (roundCounter === 0) {
       console.log(`Congratulations, ${name}!`);
     } else {
-      const result = quizFlow();
+      const result = startQuiz();
       const question = car(result);
       const rightAnswer = cdr(result);
       console.log(`Question: ${question}`);
@@ -27,13 +25,11 @@ const playQuiz = (quiz, rules) => {
       if (rightAnswer !== userAnswer) {
         console.log(`Let's try again, ${name}!\n'${userAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
       } else {
-        iter(quizFlow, name, counter + 1);
+        iter(startQuiz, name, roundCounter - 1);
       }
     }
   };
-  return iter(quiz, userName);
+  return iter(quiz, userName, 3);
 };
 
-export {
-  generateNumber, playQuiz,
-};
+export default playQuiz;
