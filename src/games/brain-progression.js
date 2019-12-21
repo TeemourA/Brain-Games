@@ -1,6 +1,6 @@
 import { cons } from '@hexlet/pairs';
 import generateNumber from '../utils';
-import playQuiz from '..';
+import playGame from '..';
 
 const rule = 'What number is missing in the progression?';
 
@@ -27,4 +27,4 @@ const generateBrainProgressionData = () => {
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(generateBrainProgressionData, rule);
+export default () => playGame(generateBrainProgressionData, rule);

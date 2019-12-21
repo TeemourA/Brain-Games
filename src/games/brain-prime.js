@@ -1,6 +1,6 @@
 import { cons } from '@hexlet/pairs';
 import generateNumber from '../utils';
-import playQuiz from '..';
+import playGame from '..';
 
 const rule = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
@@ -25,4 +25,4 @@ const generateBrainPrimeData = () => {
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(generateBrainPrimeData, rule);
+export default () => playGame(generateBrainPrimeData, rule);

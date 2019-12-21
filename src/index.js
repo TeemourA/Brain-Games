@@ -7,7 +7,7 @@ const getName = () => {
   return name.length ? name : anon;
 };
 
-const playQuiz = (quiz, rule) => {
+const playQuiz = (makeGameData, rule) => {
   const roundsCount = 3;
   console.log('Welcome to the Brain Games!');
   console.log(`${rule}\n`);
@@ -18,9 +18,9 @@ const playQuiz = (quiz, rule) => {
     if (roundCounter === 0) {
       console.log(`Congratulations, ${userName}!`);
     } else {
-      const result = quiz();
-      const question = car(result);
-      const rightAnswer = cdr(result);
+      const gameData = makeGameData();
+      const question = car(gameData);
+      const rightAnswer = cdr(gameData);
       console.log(`Question: ${question}`);
       const userAnswer = readlineSync.question('Your answer: ');
 

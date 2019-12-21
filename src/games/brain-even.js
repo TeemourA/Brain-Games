@@ -1,6 +1,6 @@
 import { cons } from '@hexlet/pairs';
 import generateNumber from '../utils';
-import playQuiz from '..';
+import playGame from '..';
 
 const rule = 'Answer "yes" if the number is even, otherwise answer "no".';
 const isEven = (n) => (!(n % 2));
@@ -12,4 +12,4 @@ const generateBrainEvenData = () => {
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(generateBrainEvenData, rule);
+export default () => playGame(generateBrainEvenData, rule);

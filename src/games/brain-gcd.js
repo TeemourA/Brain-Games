@@ -1,6 +1,6 @@
 import { cons } from '@hexlet/pairs';
 import generateNumber from '../utils';
-import playQuiz from '..';
+import playGame from '..';
 
 const rule = 'Find the greatest common divisor of given numbers.';
 const gcd = (x, y) => (y ? gcd(y, x % y) : x);
@@ -14,4 +14,4 @@ const generateBrainGcdData = () => {
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(generateBrainGcdData, rule);
+export default () => playGame(generateBrainGcdData, rule);
