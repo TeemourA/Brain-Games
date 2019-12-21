@@ -18,7 +18,7 @@ const calculateAnswer = (operation, x, y) => {
   }
 };
 
-const playBrainCalc = () => {
+const generateBrainCalcData = () => {
   const firstOperand = generateNumber(0, 100);
   const secondOperand = generateNumber(0, 100);
   const operation = operations[generateNumber(0, operations.length - 1)];
@@ -28,4 +28,4 @@ const playBrainCalc = () => {
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(playBrainCalc, rule);
+export default () => playQuiz(generateBrainCalcData, rule);

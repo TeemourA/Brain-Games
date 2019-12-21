@@ -7,29 +7,31 @@ const getName = () => {
   return name.length ? name : anon;
 };
 
-const playQuiz = (quiz, rules) => {
+const playQuiz = (quiz, rule) => {
+  const roundsCount = 3;
   console.log('Welcome to the Brain Games!');
-  console.log(`${rules}\n`);
+  console.log(`${rule}\n`);
   const userName = getName();
   console.log(`Hello, ${userName}!`);
-  const iter = (startQuiz, name, roundCounter) => {
+
+  const iter = (roundCounter) => {
     if (roundCounter === 0) {
-      console.log(`Congratulations, ${name}!`);
+      console.log(`Congratulations, ${userName}!`);
     } else {
-      const result = startQuiz();
+      const result = quiz();
       const question = car(result);
       const rightAnswer = cdr(result);
       console.log(`Question: ${question}`);
       const userAnswer = readlineSync.question('Your answer: ');
 
       if (rightAnswer !== userAnswer) {
-        console.log(`Let's try again, ${name}!\n'${userAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
+        console.log(`Let's try again, ${userName}!\n'${userAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
       } else {
-        iter(startQuiz, name, roundCounter - 1);
+        iter(roundCounter - 1);
       }
     }
   };
-  return iter(quiz, userName, 3);
+  iter(roundsCount);
 };
 
 export default playQuiz;

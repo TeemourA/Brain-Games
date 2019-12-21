@@ -18,12 +18,11 @@ const isPrime = (num) => {
   return iter(num, 2);
 };
 
-const playBrainPrime = () => {
-  const number = generateNumber(0, 150);
-  const rightAnswer = isPrime(number) ? 'yes' : 'no';
-  const currentQuestion = `${number}`;
+const generateBrainPrimeData = () => {
+  const currentQuestion = generateNumber(0, 150);
+  const rightAnswer = isPrime(currentQuestion) ? 'yes' : 'no';
 
   return cons(currentQuestion, rightAnswer);
 };
 
-export default () => playQuiz(playBrainPrime, rule);
+export default () => playQuiz(generateBrainPrimeData, rule);
