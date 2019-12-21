@@ -24,7 +24,7 @@ const playQuiz = (quiz, rule) => {
       console.log(`Question: ${question}`);
       const userAnswer = readlineSync.question('Your answer: ');
 
-      if (rightAnswer !== userAnswer) {
+      if (userAnswer !== rightAnswer) {
         console.log(`Let's try again, ${userName}!\n'${userAnswer}' is wrong answer ;(. Correct answer is '${rightAnswer}'.`);
       } else {
         iter(roundCounter - 1);
